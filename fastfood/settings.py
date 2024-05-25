@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-(u9)u^2ta6+78!2^kqb(0^o2y!v7z@80=wv#az#+v4@+@m^qje
 DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'restaurant.onrender.com',]
+ALLOWED_HOSTS = ['127.0.0.1', 'restaurant-l2vv.onrender.com',]
 
 # Application definition
 
@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'fastfood.wsgi.application'
 
 DATABASES = {
 
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': BASE_DIR / 'db.sqlite3',
+    #}
     
     #'default': {
     #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -103,14 +103,14 @@ DATABASES = {
     #    'PORT' : '5432',
     #}
 
-    #'default': {
-    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #    'NAME': 'fastfood_jdi8',
-    #    'USER' : 'fastfood_admin',
-    #    'PASSWORD' : 'LNfd9SNbaTh97eEDGJQHSyDBqjAcBDvv',
-    #    'HOST' : 'dpg-ci08doj3cv20nhsjpdv0-a.frankfurt-postgres.render.com',
-    #    'PORT' : '5432',        
-    #}
+    'default': {
+	    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+	    'NAME': 'restaurant_84as',
+	    'USER' : 'restaurant_admin',
+	    'PASSWORD' : 'WwwrXuaQmWMrgpLNvVbkZyzvlkwpHtXq',
+	    'HOST' : 'dpg-cp8pg4kf7o1s739mkfg0-a.frankfurt-postgres.render.com',
+	    'PORT' : '5432',
+    }
     
 }
 
@@ -182,12 +182,12 @@ LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
 #Сохранения изображения
-#CLOUDINARY_STORAGE = {
-#    'CLOUD_NAME': 'dlw70nxdl',
-#    'API_KEY': '623985369858249',
-#    'API_SECRET': '5a-TeJxoYrdNn5pD6yVVAIBq9Rg',
-#}
-#DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dlw70nxdl',
+    'API_KEY': '623985369858249',
+    'API_SECRET': '5a-TeJxoYrdNn5pD6yVVAIBq9Rg',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Сброс пароля по E-Mail
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
