@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "Catalog details" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<div class="row justify-content-center">
+	<div class="card" style="width:100%">
+		<div class="card-header">
+			<h5>{{ catalog.category }}</h5>
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-9">				
+					<h5>{{ catalog.title }}</h5>
+					<h6>{{ catalog.price }} 〒</h6>					
+					<table>
+						<tr>
+							<td><strong>{% trans "details" %}</strong>&nbsp:</td>
+							<td>{{ catalog.details }}</td>
+						</tr>						
+					</table>			
+				</div>
+				<div class="col-md-3">
+					{% if catalog.photo.url != None %}
+						<img style="width:100%; max-width:200px;" src="{{ catalog.photo.url}}" alt="{{ catalog.title }}" >
+					{% endif %}
+					{% if catalog.sale_quantity != None %}
+						<h6><strong>{% trans "Sale Quantity" %}</strong> {{ catalog.sale_quantity }}</h6>
+					{% endif %}					
+					{% if reviews.count > 0 %}
+						<h6>{% trans "Reviews" %} {{ reviews.count }} </h6>
+					{% endif %}	
+					{% if catalog.avg_rating != None %}
+						<p><div class="Stars" style='--rating: {{ catalog.avg_rating | stringformat:".1f" }};'></div></p>	
+						<h6><strong>{% trans "Avg Rating" %}</strong> {{ catalog.avg_rating | floatformat:1 }}</h6>
+					{% endif %}		
+				</div>
+			</div>
+		</div>
+		<div class="card-footer text-muted">
+			<a class="btn" style="width:100px" href="{% url 'catalog_list' %}">{% trans "Back" %}</a>    	
+		</div>
+	</div>	
+</div>
+{% if reviews.count > 0 %}
+<div class="row justify-content-center">
+	<h5>{% trans "Reviews" %}</h5>
+</div>
+{% for r in reviews %}
+<div class="row justify-content-center">
+	<div class="card" style="width:100%">
+		<div class="card-header">
+			<h5>{% trans "Saleday" %} {{ r.saleday | date:"d.m.Y"}}</h5>
+			<h5>{{ r.username }}</h5>
+			<h6>{% trans "Rating" %} {{ r.rating }}</h6>
+		</div>
+		<div class="card-body">
+			<p>{{ r.details }}</p>
+		</div>
+	</div>	
+</div>
+{% endfor %}	
+{% else %}	
+<div class="row justify-content-center">
+	<h5>{% trans "No reviews yet" %}</h5>
+</div">
+{% endif %}	
+{% endblock content %}

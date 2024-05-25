@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "catalog" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "catalog" %}</h2>
+{% if catalog.count > 0 %}
+<div class="row">
+	<table id="myTable" class="table-manager" style="width:100%">
+		<thead>
+			<tr>
+				<th>{% trans "category_title" %}</th>
+				<th>{% trans "catalog_title" %}</th>
+				<th>{% trans "catalog_details" %}</th>
+				<th>{% trans "price" %}</th>
+				<th>{% trans "photo" %}</th>
+				<th><a href="{% url 'catalog_create' %}">{% trans "Create" %}</a></th>					
+			</tr>
+		</thead>
+		<tbody>
+			{% for p in catalog %}
+			<tr>
+				<td>
+					<p>{{ p.category }}</p>
+				</td>
+				<td>
+					<p>{{ p.title }}</p>
+				</td>
+				<td>
+					<p>{{ p.details }}</p>
+				</td>
+				<td>
+					<p>{{ p.price }}</p>
+				</td>
+				<td>
+					{% if p.photo.url != None %}
+						<img style="width:100%; max-width:200px;" src="{{ p.photo.url}}" alt="{{ p.title }}" >
+					{% endif %}
+				</td>
+				<td>
+					<a href="{% url 'catalog_edit' p.id %}">{% trans "Change" %}</a> |
+					<a href="{% url 'catalog_read' p.id %}">{% trans "Read" %}</a> |
+					<a onclick="return confirm('Удалить запись?')" href="{% url 'catalog_delete' p.id %}">{% trans "Delete" %}</a>
+				</td>			
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% else %}
+<a href="{% url 'catalog_create' %}">{% trans "Create" %}</a>
+{% endif %}
+{% endblock content %}
+
